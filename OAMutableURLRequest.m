@@ -138,6 +138,7 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
     CFRelease(theUUID);
 	if (nonce) {
 		CFRelease(nonce);
+        nonce = nil;
 	}
 
     nonce = (NSString *)string;
@@ -184,7 +185,10 @@ signatureProvider:(id<OASignatureProviding, NSObject>)aProvider
 	[token release];
 	[(NSObject*)signatureProvider release];
 	[timestamp release];
-	CFRelease(nonce);
+    if (nonce) {
+        CFRelease(nonce);
+        nonce = nil;
+    }
 	[super dealloc];
 }
 
